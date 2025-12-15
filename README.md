@@ -101,15 +101,15 @@ la `APP_ENCRYPTION_KEY` es una clave simétrica de 256 bits
 
 - docker compose build
 - docker compose up -d
+- docker compose exec php bash
 
-## 5. Ejecución de docker
+Al ingresar a la carpeta app, verificar que .env exista y tenga los campos del paso 4. caso contrario no se migrará la tabla.
 
-- docker compose build
-- docker compose up -d
-- docker compose exec php composer install
-- docker compose exec php php bin/console cache:clear
+- composer install
+- php bin/console cache:clear
 - cd gestion-app
 - npm install
+- ng serve --proxy-config proxy.conf.json
 
 ## 6. Enlaces
 
@@ -121,6 +121,8 @@ la `APP_ENCRYPTION_KEY` es una clave simétrica de 256 bits
 ## 7. Pruebas unitarias
 
 ### .NET 10
+
+Remover ${TOKEN} y agregar la key del proyecto creado en sonarqube
 
 Ejecutar el comando para generar coverage:
 
