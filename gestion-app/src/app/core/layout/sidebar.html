@@ -1,0 +1,48 @@
+<nav class="h-screen flex flex-col px-4 py-6">
+  <!-- Logo / título -->
+  <div class="mb-8">
+    <span class="text-2xl font-bold text-blue-600">Gestión App</span>
+    <p class="text-xs text-gray-500">Cliente &amp; Pedidos</p>
+  </div>
+
+  <ul class="space-y-1 flex-1 text-sm">
+    <!-- Dashboard -->
+    <li>
+      <button
+        type="button"
+        [routerLink]="['/dashboard']"
+        routerLinkActive="bg-blue-100 text-blue-700"
+        class="w-full flex items-center px-3 py-2 rounded-lg hover:bg-blue-50 text-left"
+      >
+        <span class="mr-2">📊</span>
+        <span>Dashboard</span>
+      </button>
+    </li>
+
+    <!-- Clientes -->
+    <li>
+      <button
+        type="button"
+        [routerLink]="['/clients']"
+        routerLinkActive="bg-blue-100 text-blue-700"
+        class="w-full flex items-center px-3 py-2 rounded-lg hover:bg-blue-50 text-left"
+      >
+        <span class="mr-2">👥</span>
+        <span>Clientes</span>
+      </button>
+    </li>
+
+    <!-- Pedidos -->
+    <li>
+      <button
+        type="button"
+        [routerLink]="['/orders']"
+        routerLinkActive="bg-blue-100 text-blue-700"
+        class="w-full flex items-center px-3 py-2 rounded-lg hover:bg-blue-50 text-left"
+      >
+        <span class="mr-2">🧾</span>
+        <span>Pedidos</span>
+      </button>
+    </li>
+  </ul>
+</nav>

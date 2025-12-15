@@ -1,0 +1,130 @@
+<div class="space-y-4">
+  <div class="flex items-center justify-between">
+    <h2 class="text-lg font-semibold">Clientes</h2>
+    <div class="flex items-center gap-3 text-xs text-gray-500">
+      <span *ngIf="!loading">Total: {{ clients.length }}</span>
+      <button
+        type="button"
+        (click)="toggleCreateForm()"
+        class="px-3 py-1 rounded-md bg-blue-600 text-white text-sm hover:bg-blue-700"
+      >
+        {{ showCreateForm ? 'Cerrar formulario' : 'Nuevo cliente' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Formulario de alta rápida -->
+  <div *ngIf="showCreateForm" class="bg-white rounded-xl shadow p-4 space-y-3">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+      <div>
+        <label class="block mb-1">Nombres</label>
+        <input
+          type="text"
+          [(ngModel)]="newClient.firstName"
+          name="firstName"
+          class="w-full border rounded-lg px-3 py-1.5 focus:outline-none focus:ring"
+        />
+      </div>
+      <div>
+        <label class="block mb-1">Apellidos</label>
+        <input
+          type="text"
+          [(ngModel)]="newClient.lastName"
+          name="lastName"
+          class="w-full border rounded-lg px-3 py-1.5 focus:outline-none focus:ring"
+        />
+      </div>
+      <div>
+        <label class="block mb-1">Email</label>
+        <input
+          type="email"
+          [(ngModel)]="newClient.email"
+          name="email"
+          class="w-full border rounded-lg px-3 py-1.5 focus:outline-none focus:ring"
+        />
+      </div>
+      <div>
+        <label class="block mb-1">Documento</label>
+        <input
+          type="text"
+          [(ngModel)]="newClient.document"
+          name="document"
+          class="w-full border rounded-lg px-3 py-1.5 focus:outline-none focus:ring"
+        />
+      </div>
+      <div>
+        <label class="block mb-1">Teléfono</label>
+        <input
+          type="text"
+          [(ngModel)]="newClient.phone"
+          name="phone"
+          class="w-full border rounded-lg px-3 py-1.5 focus:outline-none focus:ring"
+        />
+      </div>
+      <div class="md:col-span-2">
+        <label class="block mb-1">Dirección</label>
+        <input
+          type="text"
+          [(ngModel)]="newClient.address"
+          name="address"
+          class="w-full border rounded-lg px-3 py-1.5 focus:outline-none focus:ring"
+        />
+      </div>
+    </div>
+
+    <div class="flex justify-end gap-2 mt-2">
+      <button
+        type="button"
+        (click)="toggleCreateForm()"
+        class="px-3 py-1 rounded-md border text-xs"
+      >
+        Cancelar
+      </button>
+      <button
+        type="button"
+        (click)="createClient()"
+        class="px-3 py-1 rounded-md bg-green-600 text-white text-xs hover:bg-green-700"
+      >
+        Guardar cliente
+      </button>
+    </div>
+  </div>
+
+  <!-- Lista de clientes -->
+  <div class="bg-white rounded-xl shadow p-4">
+    <div *ngIf="loading" class="text-xs text-gray-500">Cargando clientes...</div>
+    <div *ngIf="error" class="text-xs text-red-500">{{ error }}</div>
+
+    <div *ngIf="!loading && !error">
+      <table class="min-w-full text-xs">
+        <thead>
+          <tr class="border-b">
+            <th class="text-left py-2 pr-2">ID</th>
+            <th class="text-left py-2 pr-2">Nombre</th>
+            <th class="text-left py-2 pr-2">Email</th>
+            <th class="text-left py-2 pr-2">Documento</th>
+            <th class="text-left py-2 pr-2">Estado</th>
+            <th class="text-left py-2 pr-2">Creado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let c of clients; trackBy: trackByClientId"
+            class="border-b last:border-0"
+          >
+            <td class="py-1 pr-2">{{ c.id }}</td>
+            <td class="py-1 pr-2">{{ c.firstName }} {{ c.lastName }}</td>
+            <td class="py-1 pr-2">{{ c.email }}</td>
+            <td class="py-1 pr-2">{{ c.document }}</td>
+            <td class="py-1 pr-2">{{ c.status }}</td>
+            <td class="py-1 pr-2">{{ c.createdAt }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p *ngIf="clients.length === 0" class="text-xs text-gray-500 mt-2">
+        No hay clientes registrados.
+      </p>
+    </div>
+  </div>
+</div>
