@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+// src/app/service/auth.ts
+import { environment } from '../../environments/environments';
 
 export interface LoginRequest {
   userNameOrEmail: string;
@@ -21,7 +23,7 @@ export interface RegisterRequest {
   password: string;
 }
 
-const ACCESS_TOKEN_KEY = 'Kx9pL3rQ8nV1zT6wM2bF4hR7cY5gP0kA3sD9jL8uN2rX7v';
+const ACCESS_TOKEN_KEY =  environment.accessTokenStorageKey;
 
 @Injectable({
   providedIn: 'root',
