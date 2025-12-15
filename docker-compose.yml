@@ -42,13 +42,7 @@ services:
       ASPNETCORE_URLS: http://+:5000
       ASPNETCORE_ENVIRONMENT: Development
       JwtSecret: ${JWT_SECRET}
-      ConnectionStrings__DefaultConnection: >
-        Server=db;
-        Database=AuthDb;
-        User Id=sa;
-        Password=${MSSQL_SA_PASSWORD};
-        TrustServerCertificate=True;
-        Encrypt=False;
+      ConnectionStrings__DefaultConnection: "Server=db;Database=AuthDb;User Id=sa;Password=${MSSQL_SA_PASSWORD};TrustServerCertificate=True;Encrypt=False;"
     ports:
       - "5000:5000"
     depends_on:
