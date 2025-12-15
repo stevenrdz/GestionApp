@@ -1,0 +1,7 @@
+imports:
+    - { resource: services.yaml }
+
+services:
+    test.service_container:
+        public: true
+        alias: 'service_container'

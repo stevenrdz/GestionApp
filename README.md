@@ -86,8 +86,8 @@ Copiar el archivo `.env.example` a `.env` y rellenar:
 
 ## 5. Ejecución de docker
 
-docker compose build
-docker compose up -d
+- docker compose build
+- docker compose up -d
 
 ## 6. Pruebas unitarias
 
@@ -122,3 +122,19 @@ docker run --rm `
       /p:CoverletOutputFormat=opencover && \
     dotnet build auth-api/AuthApi.csproj && \
     dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"'
+
+
+### Symfony 7.4
+
+Ejecutar el comando para generar coverage:
+
+XDEBUG_MODE=coverage php bin/phpunit --coverage-clover var/coverage.xml
+
+Generar key en sonarqube y ejecutar el siguiente comando:
+
+docker run --rm `
+  --network gestionapp_default `
+  -e SONAR_HOST_URL="http://sonarqube:9000" `
+  -e SONAR_TOKEN="sqp_7e86bded3e10696b4167140e420c56083f728ce1" `
+  -v "${PWD}\app:/usr/src" `
+  sonarsource/sonar-scanner-cli

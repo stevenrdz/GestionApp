@@ -35,9 +35,16 @@ RUN set -eux; \
     docker-php-ext-enable sqlsrv pdo_sqlsrv; \
     rm -rf /var/lib/apt/lists/*
 
-# 4. Config PHP
+# 3.1. Xdebug para cobertura (NUEVO)
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+# 3.2. Config PHP
 RUN echo "memory_limit=512M" > /usr/local/etc/php/conf.d/memory_limit.ini \
     && echo "date.timezone=America/Guayaquil" > /usr/local/etc/php/conf.d/timezone.ini
+
+# 3.3. Config de Xdebug (NUEVO)
+COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 WORKDIR /var/www/app
 
@@ -50,5 +57,3 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["php-fpm"]
-
-

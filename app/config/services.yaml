@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../vendor/symfony/dependency-injection/Loader/schema/services.schema.json
+
+parameters: { }
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # Registra todos los servicios de src/ como servicios (entidades excluidas por defecto)
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/Kernel.php'
+            - '../tests/'
+
+    # CryptoService con la key de entorno
+    App\Service\CryptoService:
+        arguments:
+            $key: '%env(APP_ENCRYPTION_KEY)%'
+
+    # OrderRepository como servicio explícito (lo necesita DashboardController por constructor)
+    App\Repository\OrderRepository:
+        autowire: true
+        autoconfigure: true
+
+    # TODOS los controladores como servicios (para el resto de controllers que tengas)
+    App\Controller\:
+        resource: '../src/Controller/'
+        public: true
+        tags: ['controller.service_arguments']
+
+    # Definición explícita de OrderController
+    App\Controller\OrderController:
+        class: App\Controller\OrderController
+        public: true
+        autowire: true
+        autoconfigure: true
+        tags: ['controller.service_arguments']
+        arguments:
+            $em: '@doctrine.orm.entity_manager'
+            $validator: '@validator'
+
+    # Definición explícita de DashboardController
+    App\Controller\DashboardController:
+        class: App\Controller\DashboardController
+        public: true
+        autowire: true
+        autoconfigure: true
+        tags: ['controller.service_arguments']
+        arguments:
+            $em: '@doctrine.orm.entity_manager'
+            $orderRepository: '@App\Repository\OrderRepository'
