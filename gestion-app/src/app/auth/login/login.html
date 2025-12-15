@@ -1,0 +1,55 @@
+<!-- src/app/auth/login/login.html -->
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="w-full max-w-md bg-white rounded-xl shadow p-8">
+      <h2 class="text-2xl font-semibold mb-6 text-center">
+        Iniciar sesión
+      </h2>
+  
+      <form (ngSubmit)="onSubmit()" #f="ngForm" class="space-y-4">
+        <div>
+          <label class="block text-sm mb-1">Usuario o Email</label>
+          <input
+            type="text"
+            name="userNameOrEmail"
+            [(ngModel)]="userNameOrEmail"
+            required
+            class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-300"
+            placeholder="usuario o correo"
+          />
+        </div>
+  
+        <div>
+          <label class="block text-sm mb-1">Contraseña</label>
+          <input
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+            required
+            class="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-300"
+            placeholder="••••••••"
+          />
+        </div>
+  
+        <button
+          type="submit"
+          [disabled]="f.invalid || loading"
+          class="w-full py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 disabled:opacity-50"
+        >
+          {{ loading ? 'Ingresando...' : 'Ingresar' }}
+        </button>
+  
+        <p class="text-xs text-center mt-3 text-gray-600">
+          ¿No tienes cuenta?
+          <!-- usamos href para no necesitar RouterLink en imports -->
+          <a href="/auth/register" class="text-blue-600 font-medium">
+            Regístrate
+          </a>
+        </p>
+  
+        <p *ngIf="error" class="text-xs text-red-500 mt-2 text-center">
+          {{ error }}
+        </p>
+      </form>
+    </div>
+  </div>
+  

@@ -38,7 +38,7 @@ Opcionalmente, el `docker-compose.yml` también levanta otros servicios (por eje
 ### Frontend `gestion-app` (Angular)
 
 - **Framework**: Angular 21
-- **Pruebas**: -
+- **Pruebas**: Karma + Jasmine
 
 ### Servicios en Docker (según `docker-compose.yml`)
 
@@ -70,10 +70,7 @@ Variables clave:
   Clave simétrica para firmar los JWT.
 
 - `ConnectionStrings__DefaultConnection`  
-  Cadena de conexión a SQL Server.  
-  Ejemplo dentro de Docker:
-  ```text
-  Server=db;Database=AuthDb;User Id=sa;Password=@PruebaT&T;TrustServerCertificate=True;Encrypt=False;
+  Cadena de conexión a SQL Server. 
 
 ---
 
@@ -84,12 +81,44 @@ Copiar el archivo `.env.example` a `.env` y rellenar:
 - MSSQL_SA_PASSWORD
 - JWT_SECRET
 
+Dentro del proyecto app, copiar el archivo `.env.example` a `.env` y rellenar:
+
+- APP_ENV
+- APP_SECRET
+- APP_SHARE_DIR
+- DEFAULT_URI
+- DB_HOST
+- DB_PORT
+- DB_NAME
+- DB_USER
+- DB_PASSWORD
+- DB_TRUST_SERVER_CERT
+- APP_ENCRYPTION_KEY
+
+la `APP_ENCRYPTION_KEY` es una clave simétrica de 256 bits
+
 ## 5. Ejecución de docker
 
 - docker compose build
 - docker compose up -d
 
-## 6. Pruebas unitarias
+## 5. Ejecución de docker
+
+- docker compose build
+- docker compose up -d
+- docker compose exec php composer install
+- docker compose exec php php bin/console cache:clear
+- cd gestion-app
+- npm install
+
+## 6. Enlaces
+
+- http://localhost:8080/api/doc (Symfony)
+- http://localhost:5000/swagger/index.html (.NET)
+- http://localhost:4200/auth/login (Angular)
+- http://localhost:9000/ (SonarQube)
+
+## 7. Pruebas unitarias
 
 ### .NET 10
 
@@ -135,6 +164,6 @@ Generar key en sonarqube y ejecutar el siguiente comando:
 docker run --rm `
   --network gestionapp_default `
   -e SONAR_HOST_URL="http://sonarqube:9000" `
-  -e SONAR_TOKEN="sqp_7e86bded3e10696b4167140e420c56083f728ce1" `
+  -e SONAR_TOKEN="${TOKEN}" `
   -v "${PWD}\app:/usr/src" `
   sonarsource/sonar-scanner-cli

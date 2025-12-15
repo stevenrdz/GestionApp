@@ -1,0 +1,104 @@
+<!-- src/app/dashboard/dashboard.html -->
+<div *ngIf="loading" class="text-sm text-gray-500">
+  Cargando dashboard...
+</div>
+
+<div *ngIf="error" class="text-sm text-red-500">
+  {{ error }}
+</div>
+
+<div *ngIf="stats" class="space-y-6">
+  <!-- KPIs principales -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="bg-white rounded-xl shadow p-4">
+      <p class="text-xs text-gray-500">Total pedidos</p>
+      <p class="text-2xl font-bold mt-2">
+        {{ stats.totalOrders }}
+      </p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow p-4">
+      <p class="text-xs text-gray-500">Completados</p>
+      <p class="text-2xl font-bold mt-2 text-green-600">
+        {{ stats.completedOrders }}
+      </p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow p-4">
+      <p class="text-xs text-gray-500">Pendientes</p>
+      <p class="text-2xl font-bold mt-2 text-yellow-600">
+        {{ stats.pendingOrders }}
+      </p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow p-4">
+      <p class="text-xs text-gray-500">Clientes activos</p>
+      <p class="text-2xl font-bold mt-2 text-blue-600">
+        {{ stats.activeClients }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Actividad diaria / mensual -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Diaria -->
+    <div class="bg-white rounded-xl shadow p-4">
+      <h3 class="text-sm font-semibold mb-2">
+        Actividad diaria (últimos 30 días)
+      </h3>
+      <div class="max-h-64 overflow-auto">
+        <table class="min-w-full text-xs">
+          <thead>
+            <tr class="border-b">
+              <th class="text-left py-1 pr-2">Fecha</th>
+              <th class="text-right py-1 pl-2">Total pedidos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let item of stats.dailyActivity"
+              class="border-b last:border-0"
+            >
+              <td class="py-1 pr-2">
+                {{ item.date }}
+              </td>
+              <td class="py-1 pl-2 text-right">
+                {{ item.total }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Mensual -->
+    <div class="bg-white rounded-xl shadow p-4">
+      <h3 class="text-sm font-semibold mb-2">
+        Actividad mensual (últimos 12 meses)
+      </h3>
+      <div class="max-h-64 overflow-auto">
+        <table class="min-w-full text-xs">
+          <thead>
+            <tr class="border-b">
+              <th class="text-left py-1 pr-2">Mes</th>
+              <th class="text-right py-1 pl-2">Total pedidos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let item of stats.monthlyActivity"
+              class="border-b last:border-0"
+            >
+              <td class="py-1 pr-2">
+                {{ item.month }}
+              </td>
+              <td class="py-1 pl-2 text-right">
+                {{ item.total }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
