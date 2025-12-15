@@ -1,0 +1,35 @@
+# =========================
+# .NET / Visual Studio
+# =========================
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.cache
+*.log
+
+# =========================
+# Test results & coverage
+# =========================
+TestResults/
+coverage/
+
+# =========================
+# SonarQube
+# =========================
+.sonarqube/
+
+# =========================
+# Environment / secrets
+# =========================
+.env
+.env.*
+appsettings.Development.json
+appsettings.Production.json
+
+# =========================
+# OS
+# =========================
+.DS_Store
+Thumbs.db
