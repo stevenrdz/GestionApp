@@ -99,6 +99,7 @@ la `APP_ENCRYPTION_KEY` es una clave simétrica de 256 bits
 
 ## 5. Ejecución de docker
 
+- En consola bash ejecutar este comando: dos2unix docker/php/entrypoint.sh
 - docker compose build
 - docker compose up -d
 - docker compose exec php bash
@@ -107,8 +108,13 @@ Al ingresar a la carpeta app, verificar que .env exista y tenga los campos del p
 
 - composer install
 - php bin/console cache:clear
+- exit
 - cd gestion-app
+
+Al ingresar a la carpeta gestion-app, asegurarar tener descargado nodeJs y npm
+
 - npm install
+- npm install -g @angular/cli
 - ng serve --proxy-config proxy.conf.json
 
 ## 6. Enlaces
