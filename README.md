@@ -126,6 +126,8 @@ Al ingresar a la carpeta gestion-app, asegurarar tener descargado nodeJs y npm
 
 ## 7. Pruebas unitarias
 
+Acceder a SonarQube e ingresar admin en los campos del formulario, se debe cambiar la contraseña, una vez realizado se deben crear dos proyectos, de esta forma se debe tomar el token y ejecutar el script que esta en la carpeta scripts/ 
+
 ### .NET 10
 
 Remover ${TOKEN} y agregar la key del proyecto creado en sonarqube
