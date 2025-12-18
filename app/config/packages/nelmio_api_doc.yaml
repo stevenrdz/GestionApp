@@ -1,9 +1,20 @@
 nelmio_api_doc:
-    documentation:
-        info:
-            title: Cliente API
-            version: 1.0.0
+  documentation:
+    info:
+      title: Cliente API
+      version: 1.0.0
 
-    areas:
-        default:
-            path_patterns: ['^/api']
+    components:
+      securitySchemes:
+        BearerAuth:
+          type: http
+          scheme: bearer
+          bearerFormat: JWT
+
+    # Aplica JWT globalmente a todos los endpoints documentados
+    security:
+      - BearerAuth: []
+
+  areas:
+    default:
+      path_patterns: ['^/api']

@@ -1,0 +1,27 @@
+security:
+  providers:
+    app_user_provider:
+      memory: null
+
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+
+    api:
+      pattern: ^/api
+      stateless: true
+      provider: app_user_provider
+      custom_authenticator: App\Security\JwtAuthenticator
+
+  access_control:
+    # Nelmio (UI y spec)
+    - { path: ^/api/doc, roles: PUBLIC_ACCESS }
+    - { path: ^/api/docs, roles: PUBLIC_ACCESS }
+    - { path: ^/api/doc\.json, roles: PUBLIC_ACCESS }
+
+    # Opcional
+    - { path: ^/api/health, roles: PUBLIC_ACCESS }
+
+    # Todo lo demás en /api requiere JWT
+    - { path: ^/api, roles: ROLE_USER }

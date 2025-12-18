@@ -38,7 +38,7 @@ Opcionalmente, el `docker-compose.yml` también levanta otros servicios (por eje
 ### Frontend `gestion-app` (Angular)
 
 - **Framework**: Angular 21
-- **Pruebas**: Karma + Jasmine
+- **Pruebas**: Vitest
 
 ### Servicios en Docker (según `docker-compose.yml`)
 
